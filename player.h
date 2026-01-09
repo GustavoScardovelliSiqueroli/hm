@@ -5,6 +5,7 @@
 
 typedef struct {
   Entity base;
+  float mana;
 } Player;
 
 #endif // !PLAYER_H
