@@ -1,4 +1,5 @@
 #include "dice.h"
+#include "enemy.h"
 #include "entity.h"
 #include "player.h"
 #include <stdio.h>
@@ -10,7 +11,6 @@ void clear() { system("clear"); }
 
 void print_waiting_int(char *pre_string, int (*funcao)()) {
   struct timespec t = {
-      .tv_sec = 0,
       .tv_nsec = 200000000,
   };
   char wait_dots[4] = "...";
@@ -27,34 +27,30 @@ void print_waiting_int(char *pre_string, int (*funcao)()) {
   nanosleep(&t, NULL);
 }
 
+void start_game(Player *p) {
+  Entity pb = {100, 0, 0, 10};
+  p->base = pb;
+  p->exp = 0;
+  p->level = 1;
+}
+
 int main(int argc, char *argv[]) {
   srand(time(NULL));
   clear();
 
-  print_waiting_int("🎲", roll_dice);
+  Player p1;
+  start_game(&p1);
 
-  printf("\n");
-
-  Entity entity_test = {
-      .health = 100,
-      .armor = .1,
-      .power = 10,
-      .shield = 5,
-  };
-
-  Player p1 = {
-      .base =
-          {
-              .health = 100,
-              .armor = .1,
-              .power = 10,
-              .shield = 5,
-          },
-      .mana = 100,
-  };
-
-  entity_take_damage(&p1.base, 100);
+  entity_take_damage(&p1.base, 80);
   printf("Vida do player apos tomar dano: %.1f\n", p1.base.health);
+
+  Enemy e1;
+  get_enemy(&e1, 0, 1);
+
+  printf("Inimigo selecioado: %s\n", e1.name);
+
+  // Vai cair contra um inimigo aleatorio dentro de alguns predefinidos,
+  // depois rodar o dado para descobrir quanto de dano vai dar / tomar
 
   return EXIT_SUCCESS;
 }
