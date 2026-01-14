@@ -1,4 +1,6 @@
 #include "player.h"
+#include "entity.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 const int PLAYER_MAX_EXP = 10;
@@ -22,3 +24,12 @@ void player_gain_exp(Player *p, int exp) {
     p->level++;
   }
 };
+
+void player_destroy(Player *p) { free(p); }
+
+void player_print(Player *p) {
+  entity_print(&p->base);
+  printf("\nmana: %.2f\n", p->mana);
+  printf("level: %d\n", p->level);
+  printf("exp: %d", p->exp);
+}
