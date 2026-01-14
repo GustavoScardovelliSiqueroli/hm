@@ -8,6 +8,7 @@ typedef struct {
   int power;
 } Entity;
 
-void entity_take_damage(Entity *p, float damage);
+void entity_take_damage(Entity *ent, float damage);
+void entity_print(Entity *ent);
 
 #endif
