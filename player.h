@@ -10,6 +10,8 @@ typedef struct {
   int exp;
 } Player;
 
-void gain_exp(Player *p, int exp);
+void player_gain_exp(Player *p, int exp);
+
+Player *player_create();
 
 #endif // !PLAYER_H
