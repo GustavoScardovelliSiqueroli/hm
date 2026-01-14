@@ -1,4 +1,3 @@
-#include "dice.h"
 #include "enemy.h"
 #include "entity.h"
 #include "player.h"
@@ -27,25 +26,17 @@ void print_waiting_int(char *pre_string, int (*funcao)()) {
   nanosleep(&t, NULL);
 }
 
-void start_game(Player *p) {
-  Entity pb = {100, 0, 0, 10};
-  p->base = pb;
-  p->exp = 0;
-  p->level = 1;
-}
-
 int main(int argc, char *argv[]) {
   srand(time(NULL));
   clear();
 
-  Player p1;
-  start_game(&p1);
+  Player *p1 = player_create();
 
-  entity_take_damage(&p1.base, 80);
-  printf("Vida do player apos tomar dano: %.1f\n", p1.base.health);
+  entity_take_damage(&p1->base, 80);
+  printf("Vida do player apos tomar dano: %.1f\n", p1->base.health);
 
   Enemy e1;
-  get_enemy(&e1, 0, 1);
+  enemy_init_random(&e1, 0, 1);
 
   printf("Inimigo selecioado: %s\n", e1.name);
 

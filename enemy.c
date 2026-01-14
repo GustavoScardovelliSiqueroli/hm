@@ -3,7 +3,7 @@
 
 static const Enemy ENEMIES[] = {
     {
-        .name = "goblin 1",
+        .name = "goblin leve",
         .tier = 1,
         .base =
             {
@@ -15,14 +15,14 @@ static const Enemy ENEMIES[] = {
         .drop_exp = 5,
     },
     {
-        .name = "goblin 2",
+        .name = "goblin pesado",
         .tier = 1,
         .base =
             {
-                .health = 20,
+                .health = 33,
                 .shield = 0,
                 .armor = 0,
-                .power = 5,
+                .power = 3,
             },
         .drop_exp = 5,
     },
@@ -31,9 +31,9 @@ static const Enemy ENEMIES[] = {
 
 static const int ENEMIES_COUNT = sizeof(ENEMIES) / sizeof(ENEMIES[0]);
 
-int get_max_tier_enemy() {
+int enemy_get_max_tier() {
   if (ENEMIES_COUNT <= 0) {
-    return 0;
+    return -1;
   }
   int max_tier = 0;
   for (int i = 0; i < ENEMIES_COUNT; i++) {
@@ -44,7 +44,7 @@ int get_max_tier_enemy() {
   return max_tier;
 }
 
-int get_enemy(Enemy *out, int min_tier, int max_tier) {
+int enemy_init_random(Enemy *out, int min_tier, int max_tier) {
   int valid_indexes[ENEMIES_COUNT];
   int count = 0;
 

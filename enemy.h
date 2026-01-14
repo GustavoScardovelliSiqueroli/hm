@@ -10,6 +10,7 @@ typedef struct {
   int drop_exp;
 } Enemy;
 
-int get_enemy(Enemy *out, int min_tier, int max_tier);
+int enemy_init_random(Enemy *out, int min_tier, int max_tier);
+Enemy *enemy_create_random(int min_tier, int max_tier);
 
 #endif // !ENEMY_H
