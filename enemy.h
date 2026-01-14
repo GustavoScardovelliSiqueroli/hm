@@ -12,5 +12,6 @@ typedef struct {
 
 int enemy_init_random(Enemy *out, int min_tier, int max_tier);
 Enemy *enemy_create_random(int min_tier, int max_tier);
+void enemy_destroy(Enemy *e);
 
 #endif // !ENEMY_H

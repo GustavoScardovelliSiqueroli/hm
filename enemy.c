@@ -64,3 +64,5 @@ int enemy_init_random(Enemy *out, int min_tier, int max_tier) {
   *out = ENEMIES[chosen];
   return 0;
 }
+
+void enemy_destroy(Enemy *e) { free(e); }
