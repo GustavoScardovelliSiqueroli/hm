@@ -1,11 +1,30 @@
 #include "dice.h"
 #include "enemy.h"
 #include "entity.h"
+#include "menu.h"
 #include "player.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <termios.h>
 #include <time.h>
 #include <unistd.h>
+
+void clear() { system("clear"); }
+
+char getch(void) {
+  struct termios oldt, newt;
+  char c;
+
+  tcgetattr(STDIN_FILENO, &oldt);
+  newt = oldt;
+  newt.c_lflag &= ~(ICANON | ECHO);
+  tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+
+  c = getchar();
+
+  tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+  return c;
+}
 
 void print_waiting_int(char *pre_string, int (*funcao)()) {
   struct timespec t = {
@@ -27,14 +46,29 @@ void print_waiting_int(char *pre_string, int (*funcao)()) {
 
 int main(int argc, char *argv[]) {
   srand(time(NULL));
-  printf("******************************\n");
-
   char p_name[50];
+  char menu_response = '0';
 
-  printf("nome: ");
+  clear();
+
+  printf("\nname: ");
   scanf("%s", p_name);
+
   Player *p1 = player_create();
-  player_print(p1);
+
+  while (menu_response != 'q') {
+    clear();
+    printf("\n");
+    menu_print();
+    printf("\n");
+    menu_response = getch();
+    if (menu_response == '1') {
+      clear();
+      printf("\n");
+      player_print(p1, p_name);
+      getch();
+    }
+  }
 
   // Player *p1 = player_create();
   //

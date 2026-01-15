@@ -27,9 +27,13 @@ void player_gain_exp(Player *p, int exp) {
 
 void player_destroy(Player *p) { free(p); }
 
-void player_print(Player *p) {
+void player_print(Player *p, char *name) {
+  printf("PLAYER ");
+  printf("{\n");
+  printf("name: %s\n", name);
   entity_print(&p->base);
   printf("\nmana: %.2f\n", p->mana);
   printf("level: %d\n", p->level);
-  printf("exp: %d", p->exp);
+  printf("exp: %d\n", p->exp);
+  printf("}\n");
 }

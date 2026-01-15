@@ -13,6 +13,6 @@ typedef struct {
 void player_gain_exp(Player *p, int exp);
 Player *player_create();
 void player_destroy(Player *p);
-void player_print(Player *p);
+void player_print(Player *p, char *name);
 
 #endif // !PLAYER_H
